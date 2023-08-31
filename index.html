@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 class="lng-hello">Hello World</h1>
+    <h2 class="lng-we">We checked system</h2>
+    <select class="change-lang">
+      <option value="ru" selected>RU</option>
+      <option value="en">EN</option>
+    </select>
+     <script src="./lang.js"></script>
+    
+  </body>
+</html>
+<script>
+  const select = document.querySelector('.change-lang');
+  const allLang = ['ru', 'en'];
+
+  select.addEventListener('change', changeURLLanguage);
+
+  // перекнаправить на url с указанием языка
+  function changeURLLanguage() {
+    let lang = select.value;
+    location.href = window.location.pathname + '#' + lang;
+    // location.reload();
+  }
+
+  function changeLanguage() {
+    let hash = window.location.hash;
+    hash = hash.substr(1);
+    console.log(hash);
+    if (!allLang.includes(hash)) {
+      location.href = window.location.pathname + '#tj';
+      // location.reload();
+    }
+    select.value = hash;
+    // document.querySelector('.lng-unit').innerHTML = langArr['unit'][hash];
+    for (let key in langArr) {
+      let elem = document.querySelector('.lng-' + key);
+      if (elem) {
+        elem.innerHTML = langArr[key][hash];
+      }
+    }
+  }
+
+  changeLanguage();
+</script>
